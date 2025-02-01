@@ -5,9 +5,16 @@
 // Plasmic Project: ayMB79M2Zha2oXCHU8VvVd
 import * as React from "react";
 import { AntdConfigProvider } from "@plasmicpkgs/antd5/skinny/registerConfigProvider";
+import { EmbedCss } from "@plasmicpkgs/plasmic-embed-css";
+import { CmsCredentialsProvider } from "@plasmicpkgs/plasmic-cms";
 
 export default function GlobalContextsProvider(props) {
-  const { children, antdConfigProviderProps } = props;
+  const {
+    children,
+    antdConfigProviderProps,
+    embedCssProps,
+    cmsCredentialsProviderProps
+  } = props;
   return (
     <AntdConfigProvider
       {...antdConfigProviderProps}
@@ -101,7 +108,43 @@ export default function GlobalContextsProvider(props) {
           : false
       }
     >
-      {children}
+      <EmbedCss
+        {...embedCssProps}
+        css={
+          embedCssProps && "css" in embedCssProps
+            ? embedCssProps.css
+            : undefined
+        }
+      >
+        <CmsCredentialsProvider
+          {...cmsCredentialsProviderProps}
+          databaseId={
+            cmsCredentialsProviderProps &&
+            "databaseId" in cmsCredentialsProviderProps
+              ? cmsCredentialsProviderProps.databaseId
+              : undefined
+          }
+          databaseToken={
+            cmsCredentialsProviderProps &&
+            "databaseToken" in cmsCredentialsProviderProps
+              ? cmsCredentialsProviderProps.databaseToken
+              : undefined
+          }
+          host={
+            cmsCredentialsProviderProps && "host" in cmsCredentialsProviderProps
+              ? cmsCredentialsProviderProps.host
+              : "https://data.plasmic.app"
+          }
+          locale={
+            cmsCredentialsProviderProps &&
+            "locale" in cmsCredentialsProviderProps
+              ? cmsCredentialsProviderProps.locale
+              : undefined
+          }
+        >
+          {children}
+        </CmsCredentialsProvider>
+      </EmbedCss>
     </AntdConfigProvider>
   );
 }

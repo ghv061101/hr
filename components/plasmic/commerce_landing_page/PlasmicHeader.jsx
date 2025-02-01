@@ -31,13 +31,13 @@ import IconLink from "../../IconLink"; // plasmic-import: vFCQNVgdowh3/component
 import { AntdDropdown } from "@plasmicpkgs/antd5/skinny/registerDropdown";
 import { AntdMenuItem } from "@plasmicpkgs/antd5/skinny/registerMenu";
 import { AntdPopover } from "@plasmicpkgs/antd5/skinny/registerPopover";
-import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import { useScreenVariants as useScreenVariantsg3WJl7Ma3Cux } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: G3wJl7Ma3Cux/globalVariant
 import "@plasmicapp/react-web/lib/plasmic.css";
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: ayMB79M2Zha2oXCHU8VvVd/projectcss
 import sty from "./PlasmicHeader.module.css"; // plasmic-import: HqmQP133pVT3/css
-import IconIcon from "./icons/PlasmicIcon__Icon"; // plasmic-import: dtLZq9kCn5ZK/icon
+import ProfileIcon from "./icons/PlasmicIcon__Profile"; // plasmic-import: uRgoqHXaOAXS/icon
 
 createPlasmicElementProxy;
 
@@ -114,6 +114,7 @@ function PlasmicHeader__RenderFunc(props) {
         projectcss.plasmic_mixins,
         projectcss.plasmic_tokens,
         plasmic_antd_5_hostless_css.plasmic_tokens,
+        plasmic_plasmic_rich_components_css.plasmic_tokens,
         sty.root,
         { [sty.rootexpanded]: hasVariant($state, "expanded", "expanded") }
       )}
@@ -157,10 +158,10 @@ function PlasmicHeader__RenderFunc(props) {
             displayMinWidth={"0"}
             displayWidth={"100%"}
             src={{
-              src: "/plasmic/commerce_landing_page/images/logoSvg2.svg",
-              fullWidth: 240,
-              fullHeight: 48,
-              aspectRatio: 5
+              src: "/plasmic/commerce_landing_page/images/logo2Png.png",
+              fullWidth: 732,
+              fullHeight: 341,
+              aspectRatio: undefined
             }}
           />
         </PlasmicLink__>
@@ -198,14 +199,6 @@ function PlasmicHeader__RenderFunc(props) {
           />
 
           <LinkButton
-            className={classNames("__wab_instance", sty.linkButton__qr6L4)}
-            href={"/#blog"}
-            size={"small"}
-            text={""}
-            type={"blankGray"}
-          />
-
-          <LinkButton
             className={classNames("__wab_instance", sty.linkButton__d7Su4)}
             href={"/#contact"}
             size={"small"}
@@ -226,7 +219,7 @@ function PlasmicHeader__RenderFunc(props) {
           <IconLink
             className={classNames("__wab_instance", sty.iconLink___23RrD)}
             icon={
-              <IconIcon
+              <ProfileIcon
                 data-plasmic-name={"svg"}
                 data-plasmic-override={overrides.svg}
                 className={classNames(projectcss.all, sty.svg)}
@@ -289,6 +282,7 @@ function PlasmicHeader__RenderFunc(props) {
                   data-plasmic-name={"popover"}
                   data-plasmic-override={overrides.popover}
                   arrow={true}
+                  children={null}
                   className={classNames("__wab_instance", sty.popover)}
                   content={null}
                   contentText={"logout"}
@@ -297,7 +291,8 @@ function PlasmicHeader__RenderFunc(props) {
                     projectcss.plasmic_default_styles,
                     projectcss.plasmic_mixins,
                     projectcss.plasmic_tokens,
-                    plasmic_antd_5_hostless_css.plasmic_tokens
+                    plasmic_antd_5_hostless_css.plasmic_tokens,
+                    plasmic_plasmic_rich_components_css.plasmic_tokens
                   )}
                   mouseEnterDelay={0}
                   mouseLeaveDelay={0}
@@ -310,28 +305,7 @@ function PlasmicHeader__RenderFunc(props) {
                   open={generateStateValueProp($state, ["popover", "open"])}
                   popoverScopeClassName={sty["popover__popover"]}
                   title={null}
-                >
-                  <AntdButton
-                    data-plasmic-name={"button"}
-                    data-plasmic-override={overrides.button}
-                    children={null}
-                    className={classNames("__wab_instance", sty.button)}
-                    disabled={true}
-                    shape={(() => {
-                      try {
-                        return undefined;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return "circle";
-                        }
-                        throw e;
-                      }
-                    })()}
-                  />
-                </AntdPopover>
+                />
               </AntdDropdown>
             }
           />
@@ -381,24 +355,13 @@ function PlasmicHeader__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: [
-    "root",
-    "menuButton",
-    "link",
-    "img",
-    "svg",
-    "dropdown",
-    "popover",
-    "button"
-  ],
-
+  root: ["root", "menuButton", "link", "img", "svg", "dropdown", "popover"],
   menuButton: ["menuButton"],
   link: ["link", "img"],
   img: ["img"],
   svg: ["svg"],
-  dropdown: ["dropdown", "popover", "button"],
-  popover: ["popover", "button"],
-  button: ["button"]
+  dropdown: ["dropdown", "popover"],
+  popover: ["popover"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -439,7 +402,6 @@ export const PlasmicHeader = Object.assign(
     svg: makeNodeComponent("svg"),
     dropdown: makeNodeComponent("dropdown"),
     popover: makeNodeComponent("popover"),
-    button: makeNodeComponent("button"),
     // Metadata about props expected for PlasmicHeader
     internalVariantProps: PlasmicHeader__VariantProps,
     internalArgProps: PlasmicHeader__ArgProps

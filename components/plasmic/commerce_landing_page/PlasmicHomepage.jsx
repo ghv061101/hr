@@ -25,12 +25,14 @@ import {
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
+import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import Header from "../../Header"; // plasmic-import: HqmQP133pVT3/component
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
 import Slider from "../../Slider"; // plasmic-import: J1DclQ3GRL5-/component
 import "@plasmicapp/react-web/lib/plasmic.css";
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
+import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: ayMB79M2Zha2oXCHU8VvVd/projectcss
 import sty from "./PlasmicHomepage.module.css"; // plasmic-import: wsYVvP0AoOUV/css
 
@@ -69,6 +71,7 @@ function PlasmicHomepage__RenderFunc(props) {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
+  let [$queries, setDollarQueries] = React.useState({});
   const stateSpecs = React.useMemo(
     () => [
       {
@@ -125,9 +128,37 @@ function PlasmicHomepage__RenderFunc(props) {
   const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
-    $queries: {},
+    $queries: $queries,
     $refs
   });
+  const new$Queries = {
+    date: usePlasmicDataOp(() => {
+      return {
+        sourceId: "53jKhWPN1nAofbBQzDxVGV",
+        opId: "3691b304-ad13-4f0a-9ad1-ec8eea905b3f",
+        userArgs: {},
+        cacheKey: `plasmic.$.${(() => {
+          try {
+            return undefined;
+          } catch (e) {
+            if (
+              e instanceof TypeError ||
+              e?.plasmicType === "PlasmicUndefinedDataError"
+            ) {
+              return "";
+            }
+            throw e;
+          }
+        })()}.$.3691b304-ad13-4f0a-9ad1-ec8eea905b3f.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
+    })
+  };
+  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
+    setDollarQueries(new$Queries);
+    $queries = new$Queries;
+  }
   return (
     <React.Fragment>
       <Head>
@@ -184,6 +215,7 @@ function PlasmicHomepage__RenderFunc(props) {
             projectcss.plasmic_mixins,
             projectcss.plasmic_tokens,
             plasmic_antd_5_hostless_css.plasmic_tokens,
+            plasmic_plasmic_rich_components_css.plasmic_tokens,
             sty.root
           )}
           onClick={async event => {
@@ -269,7 +301,7 @@ function PlasmicHomepage__RenderFunc(props) {
                         displayMaxWidth={"100%"}
                         displayMinHeight={"0"}
                         displayMinWidth={"0"}
-                        displayWidth={"247px"}
+                        displayWidth={"277px"}
                         loading={"lazy"}
                         src={{
                           src: "/plasmic/commerce_landing_page/images/ellipse10.png",
@@ -542,7 +574,7 @@ function PlasmicHomepage__RenderFunc(props) {
                           data-plasmic-name={"slider"}
                           data-plasmic-override={overrides.slider}
                           className={classNames("__wab_instance", sty.slider)}
-                          filled={false}
+                          filled={true}
                           initialValue={0}
                           label={
                             <div
@@ -606,7 +638,7 @@ function PlasmicHomepage__RenderFunc(props) {
                           data-plasmic-name={"slider2"}
                           data-plasmic-override={overrides.slider2}
                           className={classNames("__wab_instance", sty.slider2)}
-                          filled={false}
+                          filled={true}
                           initialValue={0}
                           label={
                             <div
@@ -705,18 +737,14 @@ function PlasmicHomepage__RenderFunc(props) {
                 </Stack__>
               </div>
             </div>
-            <div className={classNames(projectcss.all, sty.freeBox___9B9Uo)}>
-              <div className={classNames(projectcss.all, sty.freeBox__rQ43Z)}>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__l7Jdy
-                  )}
-                >
-                  {"Leave Status "}
-                </div>
-              </div>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__l7Jdy
+              )}
+            >
+              {"Leave Status "}
             </div>
           </div>
         </div>
